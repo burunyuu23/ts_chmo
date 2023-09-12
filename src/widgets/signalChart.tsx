@@ -8,16 +8,16 @@ type Props = {
 const SignalChart  = ({signal}: Props) => {
   return (
     <div>
-      <LineChart width={600} height={300} data={signal}>
-        <XAxis dataKey="time"/>
+      <LineChart width={800} height={300} data={signal}>
+        <XAxis dataKey="time" unit="c" />
         <YAxis />
         <CartesianGrid stroke="#ccc" />
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="digitalAmplitude" stroke="#82ca9d" name="Цифровой сигнал" dot={false} strokeWidth={4}/>
       </LineChart>
-      <LineChart width={600} height={300} data={signal}>
-        <XAxis dataKey="time"/>
+      <LineChart width={800} height={300} data={signal}>
+        <XAxis dataKey="time" unit="c" />
         <YAxis />
         <CartesianGrid stroke="#ccc" />
         <Tooltip />

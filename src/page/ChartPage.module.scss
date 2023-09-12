@@ -1,5 +1,20 @@
+.main {
+    width: 100%
+}
+
 .chartPanel {
-    display: flex;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+
+    grid-template-columns: 1fr 1fr;
+}
+
+.chart {
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .slider span {

@@ -23,16 +23,16 @@ const FFTChart = ({ signal, frequency }: Props) => {
   
     return (
       <div>
-        <LineChart width={600} height={300} data={spectrum}>
-          <XAxis dataKey="frequency" />
+        <LineChart width={800} height={300} data={spectrum}>
+          <XAxis dataKey="frequency" unit="Гц" />
           <YAxis />
           <CartesianGrid stroke="#ccc" />
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="amplitude.digitalAmplitude" stroke="#82ca9d" name="Спектр цифрового сигнала" dot={false} strokeWidth={2} />
         </LineChart>
-        <LineChart width={600} height={300} data={spectrum}>
-          <XAxis dataKey="frequency" />
+        <LineChart width={800} height={300} data={spectrum}>
+          <XAxis dataKey="frequency" unit="Гц" />
           <YAxis />
           <CartesianGrid stroke="#ccc" />
           <Tooltip />

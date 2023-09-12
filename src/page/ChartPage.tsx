@@ -63,7 +63,7 @@ const ChartPage = () => {
         
     }, [frequency, debouncedPoints]);
     return (
-        <main>
+        <main className={styles.main}>
             <aside>
                 <h2>Панель управления</h2>
                     <h3>Частота сигнала:</h3>
@@ -91,11 +91,11 @@ const ChartPage = () => {
                     </div>
             </aside>
             <div className={styles.chartPanel}>
-                <div>
+                <div className={styles.chart}>
                     <h2>Сигналы (Частота: {frequency} Гц)</h2>
                     <SignalChart signal={signal} />
                 </div>
-                <div>
+                <div className={styles.chart}>
                     <h2>Спектры сигналов (с FFT)</h2>
                     <FFTChart signal={signal} frequency={frequency}/> 
                 </div>
