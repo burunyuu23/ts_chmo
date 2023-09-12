@@ -12,7 +12,6 @@ const FFTChart = ({ signal, frequency }: Props) => {
     const [spectrum, setSpectrum] = useState<Signal[]>([]);
   
     useEffect(() => {
-      // Примените вашу функцию FFT к цифровому сигналу
       const amplitudes: DataPointAmplitudes[] = signal.map((point) => ({harmonicAmplitude: point.harmonicAmplitude, digitalAmplitude: point.digitalAmplitude}));
 
       const fftSignal = fft(amplitudes, frequency);

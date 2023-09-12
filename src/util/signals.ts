@@ -16,7 +16,7 @@ export const generateDigitalSignal = (frequency: number, duration: number): Digi
     const numSamples = Math.floor(frequency * duration);
   
     for (let i = 0; i <= numSamples; i++) {
-        const time = i / duration; // Время в секундах
+        const time = i / duration;
         const digitalAmplitude = (Math.sin(2 * Math.PI * frequency * time) > 0) ? 1 : 0;
         signal.push({ time, digitalAmplitude });
     }

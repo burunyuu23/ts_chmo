@@ -42,9 +42,9 @@ const ChartPage = () => {
     const [points, setPoints] = useState(500);
     const [debouncedPoints] = useDebounce(points, 500)
 
-    const handleSliderPointsChange = (event: MouseEvent) => {    
-        //@ts-ignore
-        const value = event.target.value;
+    const handleSliderPointsChange = (event: Event) => {    
+        const target = event.target as HTMLInputElement;
+        const value = Number(target.value);
         setPoints(value);
       };
   
@@ -52,7 +52,6 @@ const ChartPage = () => {
         const harmonic = generateHarmonicSignal(frequency, debouncedPoints);
         const digital = generateDigitalSignal(frequency, debouncedPoints);
 
-        // Объедините данные гармонического и цифрового сигнала в один signal
         const signal: DataPoint[] = harmonic.map((harmonicDataPoint, index) => ({
             time: harmonicDataPoint.time,
             harmonicAmplitude: harmonicDataPoint.harmonicAmplitude,
@@ -82,7 +81,6 @@ const ChartPage = () => {
                             defaultValue={500}
                             max={1000}
                             min={10}
-                            //@ts-ignore
                             onChange={handleSliderPointsChange}
                             step={10}
                             marks={pointMarks}
