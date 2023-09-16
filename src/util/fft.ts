@@ -4,7 +4,7 @@ export function fft(signal: DataPointAmplitudes[], frequency: number): Signal[] 
   const N = signal.length;
   const spectrum: Signal[] = [];
 
-  for (let n = 0; n <= N; n++) {
+  for (let n = 0; n <= N*2; n++) {
     let sumReal = {harmonicAmplitude: 0, digitalAmplitude: 0};
     let sumImag = {harmonicAmplitude: 0, digitalAmplitude: 0};
 
