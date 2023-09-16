@@ -18,14 +18,6 @@ const ChartPage = () => {
             label: '10 Гц',
         },
         {
-            value: 50,
-            label: '50 Гц',
-        },
-        {
-            value: 100,
-            label: '100 Гц',
-        },
-        {
             value: 200,
             label: '200 Гц',
         },
@@ -36,6 +28,14 @@ const ChartPage = () => {
         {
             value: 1000,
             label: '1 КГц',
+        },
+        {
+            value: 2000,
+            label: '2 КГц',
+        },
+        {
+            value: 5000,
+            label: '5 КГц',
         },
     ]
 
@@ -79,7 +79,7 @@ const ChartPage = () => {
                             className={styles.slider}
                             aria-label="Always visible"
                             defaultValue={500}
-                            max={1000}
+                            max={5000}
                             min={10}
                             onChange={handleSliderPointsChange}
                             step={10}
