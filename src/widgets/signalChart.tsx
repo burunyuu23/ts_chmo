@@ -9,15 +9,15 @@ const SignalChart  = ({signal}: Props) => {
   return (
     <div>
       <LineChart width={800} height={300} data={signal}>
-        <XAxis dataKey="time" unit="c" />
+        <XAxis dataKey="time" unit="c" ticks={Array(11).fill(0).map((val, index) => val + index/10)}/>
         <YAxis />
-        <CartesianGrid stroke="#ccc" />
+        <CartesianGrid stroke="#aaa" />
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="digitalAmplitude" stroke="#82ca9d" name="Цифровой сигнал" dot={false} strokeWidth={4}/>
       </LineChart>
       <LineChart width={800} height={300} data={signal}>
-        <XAxis dataKey="time" unit="c" />
+        <XAxis dataKey="time" unit="c" ticks={Array(11).fill(0).map((val, index) => val + index/10)}/>
         <YAxis />
         <CartesianGrid stroke="#ccc" />
         <Tooltip />

@@ -23,7 +23,7 @@ const FFTChart = ({ signal, frequency }: Props) => {
     return (
       <div>
         <LineChart width={800} height={300} data={spectrum}>
-          <XAxis dataKey="frequency" unit="Гц" />
+          <XAxis dataKey="frequency" unit="Гц" type="number" tickCount={2*10 + 1} ticks={Array(2*10 + 1).fill(0).map((val, index) => index*frequency/10)}/>
           <YAxis />
           <CartesianGrid stroke="#ccc" />
           <Tooltip />
@@ -31,7 +31,7 @@ const FFTChart = ({ signal, frequency }: Props) => {
           <Line type="monotone" dataKey="amplitude.digitalAmplitude" stroke="#82ca9d" name="Спектр цифрового сигнала" dot={false} strokeWidth={2} />
         </LineChart>
         <LineChart width={800} height={300} data={spectrum}>
-          <XAxis dataKey="frequency" unit="Гц" />
+          <XAxis dataKey="frequency" unit="Гц" type="number" tickCount={2*10 + 1} ticks={Array(2*10 + 1).fill(0).map((val, index) => index*frequency/10)}/>
           <YAxis />
           <CartesianGrid stroke="#ccc" />
           <Tooltip />
