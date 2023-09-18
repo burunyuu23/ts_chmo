@@ -5,11 +5,11 @@ type Props = {
     signal: DataPoint[],
 }
 
-const SignalChart  = ({signal}: Props) => {
+const SignalChart  = ({signal}: Props) => {  
   return (
     <div>
       <LineChart width={800} height={300} data={signal}>
-        <XAxis dataKey="time" unit="c" ticks={Array(11).fill(0).map((val, index) => val + index/10)}/>
+        <XAxis dataKey="time" unit="c" type="number" ticks={Array(11).fill(0).map((_, index) => index/10)}/>
         <YAxis />
         <CartesianGrid stroke="#aaa" />
         <Tooltip />
@@ -17,7 +17,7 @@ const SignalChart  = ({signal}: Props) => {
         <Line type="monotone" dataKey="digitalAmplitude" stroke="#82ca9d" name="Цифровой сигнал" dot={false} strokeWidth={4}/>
       </LineChart>
       <LineChart width={800} height={300} data={signal}>
-        <XAxis dataKey="time" unit="c" ticks={Array(11).fill(0).map((val, index) => val + index/10)}/>
+        <XAxis dataKey="time" unit="c" type="number" ticks={Array(11).fill(0).map((_, index) => index/10)}/>
         <YAxis />
         <CartesianGrid stroke="#ccc" />
         <Tooltip />
