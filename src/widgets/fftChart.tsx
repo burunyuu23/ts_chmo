@@ -15,6 +15,9 @@ const FFTChart = ({ signal, frequency }: Props) => {
     const [frequencyScale, setFrequencyScale] = useState<number>(2);
     const maxFrequencyScale = 16;
     const minFrequencyScale = 1;
+
+    const frequencyScaleArray = Array(Math.log2(maxFrequencyScale) + 1).fill(0).map((_, index) => ({name: `${2 ** index} Гц`, value: 2 ** index}))
+    
   
     useEffect(() => {
       const amplitudes: DataPointAmplitudes[] = signal.map((point) => ({harmonicAmplitude: point.harmonicAmplitude, digitalAmplitude: point.digitalAmplitude}));
@@ -73,9 +76,11 @@ const FFTChart = ({ signal, frequency }: Props) => {
           <Line type="monotone" dataKey="amplitude.harmonicAmplitude" stroke="#8884d8" name="Спектр гармонического сигнала" dot={false} strokeWidth={2} />
         </LineChart>
       </div>
-          <ButtonGroup orientation="vertical" >
-            <Button className={styles.button} variant={frequencyScale !== maxFrequencyScale ? "contained" : "outlined"} onClick={handlePlus}>+</Button>
-            <Button className={styles.button} variant={frequencyScale !== minFrequencyScale ? "contained" : "outlined"} onClick={handleMinus}>-</Button>
+          <ButtonGroup className={styles.buttonGroup} orientation="vertical" >
+            <Button className={[styles.button, styles.buttonFirst].join(" ")} variant={frequencyScale !== maxFrequencyScale ? "contained" : "outlined"} onClick={handlePlus}>+</Button>
+            {frequencyScaleArray.reverse().map((val) => 
+              (<Button key={val.value} className={styles.button} variant={frequencyScale !== val.value ? "contained" : "outlined"} onClick={() => setFrequencyScale(val.value)}>{val.name}</Button>))}
+            <Button className={[styles.button, styles.buttonLast].join(" ")} variant={frequencyScale !== minFrequencyScale ? "contained" : "outlined"} onClick={handleMinus}>-</Button>
           </ButtonGroup>
         </div>
     );
