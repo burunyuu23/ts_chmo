@@ -59,7 +59,7 @@ const FFTChart = ({ signal, frequency }: Props) => {
         <div className={styles.firstChart}>
         <div>
           <LineChart width={800} height={300} data={spectrum}>
-            <XAxis dataKey="frequency" unit="Гц" type="number" interval={frequencyScale - 1} ticks={Array(10*frequencyScale + 1).fill(0).map((_, index) => index)}/>
+            <XAxis dataKey="frequency" unit="Гц" type="number" interval={frequencyScale - 1} ticks={Array(10*frequencyScale).fill(0).map((_, index) => index)}/>
             <YAxis />
             <CartesianGrid stroke="#ccc" />
             <Tooltip />
@@ -68,7 +68,7 @@ const FFTChart = ({ signal, frequency }: Props) => {
           </LineChart>
         
         <LineChart width={800} height={300} data={spectrum}>
-            <XAxis dataKey="frequency" unit="Гц" type="number" interval={frequencyScale - 1} ticks={Array(10*frequencyScale + 1).fill(0).map((_, index) => index)}/>
+            <XAxis dataKey="frequency" unit="Гц" type="number" interval={frequencyScale - 1} ticks={Array(10*frequencyScale).fill(0).map((_, index) => index)}/>
           <YAxis />
           <CartesianGrid stroke="#ccc" />
           <Tooltip />
