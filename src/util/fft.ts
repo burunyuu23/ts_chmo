@@ -1,26 +1,64 @@
-import { DataPointAmplitudes, Signal } from "../types/signal";
-
-export function fft(signal: DataPointAmplitudes[], frequency: number): Signal[] {
+export function fft2(signal: ComplexNumber[]): ComplexNumber[] {
   const N = signal.length;
-  const spectrum: Signal[] = [];
+  
+  if (N <= 1) {
+    return signal;
+  }
 
-  for (let n = 0; n <= N*2; n++) {
-    let sumReal = {harmonicAmplitude: 0, digitalAmplitude: 0};
-    let sumImag = {harmonicAmplitude: 0, digitalAmplitude: 0};
-
-    for (let t = 0; t < N; t++) {
-      const angle = (2 * Math.PI * n * t) / N;
-      sumReal.digitalAmplitude += signal[t].digitalAmplitude * Math.cos(angle);
-      sumImag.digitalAmplitude -= signal[t].digitalAmplitude * Math.sin(angle);
-      sumReal.harmonicAmplitude += signal[t].harmonicAmplitude * Math.cos(angle);
-      sumImag.harmonicAmplitude -= signal[t].harmonicAmplitude * Math.sin(angle);
+  const evenSignal: ComplexNumber[] = [];
+  const oddSignal: ComplexNumber[] = [];
+  for (let i = 0; i < N; i++) {
+    if (i % 2 === 0) {
+      evenSignal.push(signal[i]);
+    } else {
+      oddSignal.push(signal[i]);
     }
+  }
 
-    const digitalAmplitude = Math.sqrt(sumReal.digitalAmplitude ** 2 + sumImag.digitalAmplitude ** 2) / N;
-    const harmonicAmplitude = Math.sqrt(sumReal.harmonicAmplitude ** 2 + sumImag.harmonicAmplitude ** 2) / N;
-    
-    spectrum.push({frequency: Number((n * frequency / N).toFixed(2)), amplitude: {harmonicAmplitude: harmonicAmplitude, digitalAmplitude: digitalAmplitude}});
+  const evenSpectrum = fft2(evenSignal);
+  const oddSpectrum = fft2(oddSignal);
+
+  const twiddleFactors: ComplexNumber[] = [];
+  for (let k = 0; k < N / 2; k++) {
+    const angle = (-2 * Math.PI * k) / N;
+    twiddleFactors.push([Math.cos(angle), Math.sin(angle)]);
+  }
+
+  const spectrum: ComplexNumber[] = new Array(N);
+  for (let k = 0; k < N / 2; k++) {
+    const t = complexMultiply(twiddleFactors[k], oddSpectrum[k]);
+    spectrum[k] = complexAdd(evenSpectrum[k], t);
+    spectrum[k + N / 2] = complexSubtract(evenSpectrum[k], t);
   }
 
   return spectrum;
+}
+
+export function positiveFrequenciesSpectrum(signal: ComplexNumber[]): ComplexNumber[] {
+  const N = signal.length;
+  const spectrum = fft2(signal);
+
+  const positiveSpectrum = new Array(N / 2);
+  for (let k = 0; k < N / 2; k++) {
+    positiveSpectrum[k] = spectrum[k];
+  }
+
+  return positiveSpectrum;
+}
+
+
+export type ComplexNumber = [number, number];
+
+function complexAdd(a: ComplexNumber, b: ComplexNumber): ComplexNumber {
+  return [a[0] + b[0], a[1] + b[1]];
+}
+
+function complexSubtract(a: ComplexNumber, b: ComplexNumber): ComplexNumber {
+  return [a[0] - b[0], a[1] - b[1]];
+}
+
+function complexMultiply(a: ComplexNumber, b: ComplexNumber): ComplexNumber {
+  const realPart = a[0] * b[0] - a[1] * b[1];
+  const imaginaryPart = a[0] * b[1] + a[1] * b[0];
+  return [realPart, imaginaryPart];
 }
