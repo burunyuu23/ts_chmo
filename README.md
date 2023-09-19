@@ -31,7 +31,9 @@ If you are developing a production application, we recommend updating the config
 
 <a id="скрины"></a>
 
-![image](https://github.com/burunyuu23/ts_chmo/assets/34377854/1874233e-a40e-4e13-99d4-9cdcf65629a4)
-![image](https://github.com/burunyuu23/ts_chmo/assets/34377854/a105cf76-fd51-48c8-bcf1-b47c1ccedffa)
-![image](https://github.com/burunyuu23/ts_chmo/assets/34377854/b37e4a5e-bb1d-4de6-b4cf-17014492415c)
-![image](https://github.com/burunyuu23/ts_chmo/assets/34377854/b76058b3-b631-45a4-9821-2c1a7bedcba6)
+![image](https://github.com/burunyuu23/ts_chmo/assets/34377854/5e5b306b-612f-4b4f-bd93-03177641a093)
+![image](https://github.com/burunyuu23/ts_chmo/assets/34377854/b383dcc9-d448-4e52-831e-7b0beddaec3d)
+![image](https://github.com/burunyuu23/ts_chmo/assets/34377854/7b6835b7-6b22-4ea1-ad1d-b9bcf492324d)
+![image](https://github.com/burunyuu23/ts_chmo/assets/34377854/bedb00b0-eb1c-434b-9670-04958d4af403)
+
+
