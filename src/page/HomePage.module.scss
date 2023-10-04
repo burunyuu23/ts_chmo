@@ -1,0 +1,13 @@
+.main {
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.tasks {
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+}

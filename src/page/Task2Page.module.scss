@@ -1,0 +1,63 @@
+.main {
+    width: 100%
+}
+
+.chartPanel {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+
+    grid-template-columns: 1fr 1fr;
+}
+
+.settingsPanel {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.settingsPanelText {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    flex: 0 0;
+}
+
+.modulatedCharts {
+    display: grid;
+    align-items: center;
+    position: relative;
+}
+
+.chart {
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    
+    justify-items: center;
+}
+
+.charts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.chartsButtonGroup {
+    position: absolute;
+    left: -50px;
+}
+
+.modulatingText {
+    display: flex;
+    align-items: center;
+}
+
+.select {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif !important;
+    color: rgba(255, 255, 255, 0.87) !important;
+    font-size: 1.17em !important;
+    font-weight: bold !important;
+}
