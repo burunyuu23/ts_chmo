@@ -1,25 +1,32 @@
-import { DigitalDataPoint, HarmonicDataPoint } from "../types/signal";
+import { DataPoint } from "../types/signal";
 
-export const generateHarmonicSignal = (frequency: number, length: number): HarmonicDataPoint[] => {
-    const signal: HarmonicDataPoint[] = [];
+export const generateHarmonicSignal = (frequency: number, length: number, phase?: number): DataPoint[] => {
+    const signal: DataPoint[] = [];
 
     for (let i = 0; i <= length; i++) {
         const time = i / length;
-        const harmonicAmplitude = Math.sin(2 * Math.PI * frequency * time);
-        signal.push({time, harmonicAmplitude });
+        signal.push(generateMomentHarmonicSignal(frequency, time, phase));
     }
     return signal;
 };
 
-export const generateDigitalSignal = (frequency: number, duration: number): DigitalDataPoint[] => {
-    const signal: DigitalDataPoint[] = [];
-    const numSamples = Math.floor(frequency * duration);
+export const generateMomentHarmonicSignal = (frequency: number, time: number, phase?: number): DataPoint => {
+    return {time: time, amplitude: Math.sin(2 * Math.PI * frequency * time + (phase ?? 0) + Math.PI/2)};
+};
+
+export const generateDigitalSignal = (frequency: number, duration: number, phase?: number): DataPoint[] => {
+    const signal: DataPoint[] = [];
+
+    // const randomPhase = (Math.random() - 0.5) * frequency;
   
-    for (let i = 0; i <= numSamples; i++) {
+    for (let i = 0; i <= duration; i++) {
         const time = i / duration;
-        const digitalAmplitude = (Math.sin(2 * Math.PI * frequency * time) > 0) ? 1 : 0;
-        signal.push({ time, digitalAmplitude });
+        signal.push(generateMomentDigitalSignal(frequency, time, phase));
     }
   
     return signal;
 }
+
+export const generateMomentDigitalSignal = (frequency: number, time: number, phase?: number): DataPoint => {
+    return {time: time, amplitude: Math.sin(2 * Math.PI * frequency * time + (phase ?? 0)) >= 0 ? 1 : 0};
+};

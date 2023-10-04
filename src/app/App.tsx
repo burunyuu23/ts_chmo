@@ -1,12 +1,15 @@
-import ChartPage from '../page/ChartPage'
-import './App.css'
 
-function App() {
-  
+import "./App.css"
+
+type Props = {
+  children: React.ReactNode;
+}
+
+function App({children}: Props) {
 
   return (
     <>
-      <ChartPage/>
+      {children}
     </>
   )
 }
