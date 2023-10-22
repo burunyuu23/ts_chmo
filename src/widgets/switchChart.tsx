@@ -20,7 +20,7 @@ type Props = {
     filtred?: boolean
 }
 
-const SwitchChart = ({signal, modulatingFreq, color, signalChartName, fftChartName, syntez, filtred}: Props) => {
+const SwitchChart = ({signal, modulatingFreq, carrierFreq, color, signalChartName, fftChartName, syntez, filtred}: Props) => {
     const [select, setSelect] = useState<"signal" | "spectre" | "syntez" | "syntez_spectre" | "filtred_spectre" | "filtred">("signal")
 
     const [syntezSignal, setSyntezSignal] = useState<DataPoint[]>([]);
@@ -61,6 +61,7 @@ const SwitchChart = ({signal, modulatingFreq, color, signalChartName, fftChartNa
                                   name={fftChartName}
                                   color={color}
                                   frequency={modulatingFreq}
+                                  carrierFrequency={carrierFreq}
                                   right/>);
             case "syntez":
                 return <EnvelopeChart signal={envelopeSignal}
@@ -73,6 +74,7 @@ const SwitchChart = ({signal, modulatingFreq, color, signalChartName, fftChartNa
                                   name={fftChartName}
                                   color={color}
                                   frequency={modulatingFreq}
+                                  carrierFrequency={carrierFreq}
                                   right/>);
             case "filtred":
                 return <EnvelopeChart signal={envelopeSignal.map((dataPoint) => (
@@ -95,6 +97,7 @@ const SwitchChart = ({signal, modulatingFreq, color, signalChartName, fftChartNa
                                   name={fftChartName}
                                   color={color}
                                   frequency={modulatingFreq}
+                                  carrierFrequency={carrierFreq}
                                   right/>);
         }
     }

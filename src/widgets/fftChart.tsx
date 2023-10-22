@@ -8,19 +8,20 @@ import styles from "./fftChart.module.scss"
 type Props = {
   signal: DataPoint[],
   frequency: number,
+    carrierFrequency?: number,
   name: string,
   color: string,
   right?: boolean
 }
 
-const FFTChart = ({ signal, frequency, name, color, right}: Props) => {
+const FFTChart = ({ signal, frequency, carrierFrequency, name, color, right}: Props) => {
     const [spectrum, setSpectrum] = useState<Signal[]>([]);
-    const [frequencyScale, setFrequencyScale] = useState<number>(1);
+    const [frequencyScale, setFrequencyScale] = useState<number>(carrierFrequency ? Math.max(carrierFrequency, frequency) : frequency);
     const maxFrequencyScale = 128;
     const minFrequencyScale = 1;
 
     const frequencyScaleArray = Array(Math.log2(maxFrequencyScale) + 1).fill(0).map((_, index) => 2 ** index)
-    
+
   
     useEffect(() => {
       const spectrum = fft2(signal.map((point) => ([point.amplitude, 0])));
