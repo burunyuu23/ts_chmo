@@ -51,7 +51,7 @@ export function amplitudeModulation2(carrierSignal: number[], modulatingSignal: 
   }
 
   return modulatingSignal.map((modulationValue, index) => {
-    const amplitude = modulationValue * carrierSignal[index];
+    const amplitude = (modulationValue) * carrierSignal[index];
     const time = index / carrierSignal.length;
     return { time, amplitude };
   });

@@ -94,14 +94,14 @@ const ChartPage = () => {
                 <div className={styles.chart}>
                     <h2>Сигналы (Частота: {frequency} Гц)</h2>
                     <div style={{display: "flex", justifyContent: "end"}}>
-                        <SignalChart    signal={digitalSignal} 
+                        <SignalChart    signal={digitalSignal}
                                         name="Цифровой сигнал"
                                         color="#82ca9d"/>
                     </div>
-                    <FFTChart   signal={digitalSignal} 
+                    <FFTChart   signal={digitalSignal}
                                 frequency={frequency}
                                 name='Спектр цифрового сигнала'
-                                color="#82ca9d"/> 
+                                color="#82ca9d"/>
                 </div>
                 <div>
                     <h2>Спектры сигналов (с FFT)</h2>
@@ -109,11 +109,11 @@ const ChartPage = () => {
                         <SignalChart    signal={harmonicsignal}
                                         name="Гармонический сигнал"
                                         color="#8884d8"/>
-                        <FFTChart   signal={harmonicsignal} 
+                        <FFTChart   signal={harmonicsignal}
                                     frequency={frequency}
                                     name='Спектр гармонического сигнала'
                                     color="#8884d8"
-                                    right/> 
+                                    right/>
                     </div>
                 </div>
             </div>

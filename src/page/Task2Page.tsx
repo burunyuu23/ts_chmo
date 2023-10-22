@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import styles from "./Task2Page.module.scss";
 import { generateDigitalSignal, generateHarmonicSignal } from '../util/signals';
 import { DataPoint } from '../types/signal';
@@ -7,10 +7,8 @@ import { Button, ButtonGroup, MenuItem, Select } from '@mui/material';
 import { amplitudeModulation2, frequencyModulation2, phaseModulation2 } from '../util/modulation';
 import SwitchChart from '../widgets/switchChart';
 
-type Props = {
-}
 
-const Task2Page = ({}: Props) => {
+const Task2Page = () => {
     const pointMarks = [
         {
             value: 63,
@@ -42,13 +40,13 @@ const Task2Page = ({}: Props) => {
         },
     ]
 
-    const frequencies = [1, 2, 4, 8, 16, 32, 64]
+    const frequencies = [1, 2, 4, 8, 16, 32, 64, 128]
 
     const [modulatingSignal, setModulatingSignal] = useState<DataPoint[]>([]);
     const [carrierSignal, setCarrierSignal] = useState<DataPoint[]>([]);
 
-    const [modulatingFrequency, setModulatingFrequency] = useState<number>(1);
-    const [carrierFrequency, setCarrierFrequency] = useState<number>(2);
+    const [modulatingFrequency, setModulatingFrequency] = useState<number>(4);
+    const [carrierFrequency, setCarrierFrequency] = useState<number>(32);
 
     const [points, setPoints] = useState(1023);
 
@@ -69,25 +67,24 @@ const Task2Page = ({}: Props) => {
     }
 
     const [time, setTime] = useState(0);
-    const [carrierTime, setCarrierTime] = useState(0.25)
+    const [carrierTime, setCarrierTime] = useState(0)
     const [modulatingTime, setModulatingTime] = useState(0)
 
-    const [frame, setFrame] = useState<number | null>(null);
+    const [frame, setFrame] = useState<number>(0);
 
-    const updateTime = () => {
-        setTime(prev => prev + 0.1);
-        setFrame(requestAnimationFrame(updateTime));
-        
-        if (frame !== null && frame > 1000) {
+    const updateTime = useCallback(() => {
+        if (carrierTime !== 0 || modulatingTime !== 0) {
+            setTime(prev => prev + 0.1);
+            setFrame(requestAnimationFrame(updateTime));
+        } else
             cancelAnimationFrame(frame);
-        }
-    }
+        return cancelAnimationFrame(frame);
+    }, [carrierTime, modulatingTime])
 
     useEffect(() => {
-        if (frame === null) {
             updateTime();
-        }
-    }, [])
+        return cancelAnimationFrame(frame);
+    }, [carrierTime, frame, modulatingTime, updateTime])
   
     
     useEffect(() => {
@@ -138,7 +135,7 @@ const Task2Page = ({}: Props) => {
                         </div>
                         <ButtonGroup variant="contained" aria-label="outlined button group">
                             {frequencies.map(val => (
-                            <Button variant={modulatingFrequency !== val ? "contained" : "outlined"} onClick={() => setModulatingFrequency(val)}>{val} Гц</Button>
+                            <Button key={val} variant={modulatingFrequency !== val ? "contained" : "outlined"} onClick={() => setModulatingFrequency(val)}>{val} Гц</Button>
                             ))}
                         </ButtonGroup>
                     </div>
@@ -159,7 +156,7 @@ const Task2Page = ({}: Props) => {
                         </div>
                         <ButtonGroup variant="contained" aria-label="outlined button group">
                             {frequencies.map(val => (
-                            <Button variant={carrierFrequency !== val ? "contained" : "outlined"} onClick={() => setCarrierFrequency(val)}>{val} Гц</Button>
+                            <Button key={val} variant={carrierFrequency !== val ? "contained" : "outlined"} onClick={() => setCarrierFrequency(val)}>{val} Гц</Button>
                             ))}
                         </ButtonGroup>
                     </div>
@@ -197,7 +194,7 @@ const Task2Page = ({}: Props) => {
                 </div>
             </div>
             <div className={styles.modulatedCharts}>
-                <hr style={{position: "absolute", height: "100%", left: "-1.5%"}}/>
+                <hr style={{position: "absolute", height: "100%", left: "-0.7%"}}/>
                 <SwitchChart    signal={amplitudeModulation2(carrierSignal.map(val => val.amplitude), modulatingSignal.map(val => val.amplitude))} 
                                 modulatingFreq={modulatingFrequency}
                                 carrierFreq={carrierFrequency}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fft2 } from "../util/fft";
+import {fft2} from "../util/fft";
 import { DataPoint, Signal } from "../types/signal";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Button, ButtonGroup } from "@mui/material";
