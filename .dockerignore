@@ -1,0 +1,9 @@
+node_modules/
+Images/
+README.md
+backend
+Dockerfile
+docker-compose.yml
+.gitignore
+tipis_1_task.rar
+tipis_2_task.rar

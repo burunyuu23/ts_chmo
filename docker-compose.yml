@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - "4000:80"
+    networks:
+      - mynetwork
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8001:8001"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+
